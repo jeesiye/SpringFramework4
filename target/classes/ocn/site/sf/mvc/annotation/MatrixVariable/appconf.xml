@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:component-scan base-package="ocn.site.sf.mvc.annotation.MatrixVariable"></context:component-scan>
+	<!--
+		基于java-config风格的配置，有两种配置方案。
+
+		++++ 1种是实现WebMvcConfigurerAdapter配置类，重写其内的configurePathMatch方法
+		创建 UrlPathHelper 的实例并设置该方法 setRemoveSemicolonContent(boolean)
+		注意，参数要设置为false。
+		具体设置方法如下（注意实现WebMvcConfigurerAdapter配置类）
+		@Override
+		public void configurePathMatch(PathMatchConfigurer configurer) {
+		UrlPathHelper urlPathHelper = new UrlPathHelper();
+		urlPathHelper.setRemoveSemicolonContent(false);
+		configurer.setUrlPathHelper(urlPathHelper);
+		}
+
+		++++ 1种方式是实现DelegatingWebMvcConfiguration配置类，重写实现请求处理适配器的方法
+		记住重写该方法requestMappingHandlerMapping()
+		注意，需要执行父类种的配置方法，这样才能让保留有父类的配置。
+		然后调用setRemoveSemicolonContent(boolean)，参数设置为false即可。
+		具体设置方法如下（注意实现DelegatingWebMvcConfiguration配置类）
+		@Bean
+		@Override
+		public RequestMappingHandlerMapping requestMappingHandlerMapping() {
+		RequestMappingHandlerMapping handlerMapping = super.requestMappingHandlerMapping();
+		handlerMapping.setRemoveSemicolonContent(false);
+		return handlerMapping;
+		}
+	-->
+	<mvc:annotation-driven enable-matrix-variables="true"></mvc:annotation-driven>
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+
+</beans>

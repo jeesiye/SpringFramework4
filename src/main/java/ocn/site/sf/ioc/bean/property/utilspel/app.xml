@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+	<!--具体说明应当查看对应的XSD文档。 -->
+	<util:properties id="props"
+		location="classpath:/ocn/site/sf/ioc/bean/property/utilspel/config.properties"></util:properties>
+	<!-- 以下配置是等价的 -->
+	<!-- <bean id="user" class="org.springframework.beans.factory.config.PropertiesFactoryBean"> -->
+	<!-- <property name="location" value="classpath:/sources/user.properties"></property> -->
+	<!-- <property name="fileEncoding" value="utf-8"></property> -->
+	<!-- </bean> -->
+
+	<bean class="ocn.site.sf.ioc.bean.property.utilspel.User">
+		<property name="id" value="#{props.id}"></property>
+		<property name="name" value="#{props.name}"></property>
+	</bean>
+
+
+</beans>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!--
+		特殊值的处理
+		null和空字符串;null使用标签,空字符串直接使用双引号.
+		<null/>
+	-->
+	<bean class="ocn.site.sf.ioc.bean.valuenull.Person">
+		<property name="list">
+			<null></null>
+		</property>
+	</bean>
+
+</beans>

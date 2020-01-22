@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!--完全基于spring内置的aop是有很大的不足之处的
+		那就是切面的细化度不够，若是结合aspectj是能完成这点要求的。
+		但是显然是多此一举。
+		还不如直接的使用aspectj
+		目前spring4.x版本对aspectj已经全面支持了。 -->
+
+	<bean class="org.springframework.aop.framework.ProxyFactory">
+		<property name="proxyTargetClass" value="true"></property>
+	</bean>
+
+	<bean class="ocn.site.sf.aop.spring.advice.User"></bean>
+
+	<bean class="ocn.site.sf.aop.spring.advice.MethodBeforeAdviceImpl"></bean>
+	<bean class="ocn.site.sf.aop.spring.advice.AfterReturningAdviceImpl"></bean>
+	<bean class="ocn.site.sf.aop.spring.advice.MethodInterceptorImpl"></bean>
+	<bean class="ocn.site.sf.aop.spring.advice.ThrowsAdviceImpl"></bean>
+
+
+</beans>

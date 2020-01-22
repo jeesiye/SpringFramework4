@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<bean id="paramMap" class="org.springframework.util.LinkedMultiValueMap"></bean>
+
+	<context:component-scan base-package="ocn.site.sf.mvc.webdatabinder.validator.validator"></context:component-scan>
+	<mvc:annotation-driven></mvc:annotation-driven>
+
+	<!-- 额外的第一种方式 -->
+	<!-- <mvc:annotation-driven validator="validatorImpl"></mvc:annotation-driven> -->
+
+	<!-- 额外的第二种方式 -->
+	<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"> -->
+	<!-- <property name="webBindingInitializer"> -->
+	<!-- <bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer"> -->
+	<!-- <property name="validator" ref="validatorImpl"></property> -->
+	<!-- </bean> -->
+	<!-- </property> -->
+	<!-- </bean> -->
+	<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean> -->
+	<!-- 此组件 在mvc注解驱动注册后 是自动注册的 但是xml-config配置中要手动的注册验证器
+		故不注册mvc注解驱动组件 需要手动的注册
+		此举仅作学习演练 -->
+	<!-- <bean class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"></bean> -->
+
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+</beans>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!--idref引用的是String类型的值,但此值必须是容器中存在的bean的id或name值 -->
+	<!--注意这和ref标签是有很大的区别的。 -->
+
+	<bean class="ocn.site.sf.ioc.bean.idref.Person" id="person"></bean>
+	<bean class="ocn.site.sf.ioc.bean.idref.User">
+		<property name="name">
+			<idref bean="person" />
+		</property>
+	</bean>
+
+
+</beans>

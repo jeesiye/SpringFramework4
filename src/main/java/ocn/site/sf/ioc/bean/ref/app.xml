@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!--可以引用父容器或者是父类的bean,而不仅仅限制于本配置容器环境级别的bean -->
+	<!--相对于内嵌标签,其引用的范围较广. -->
+	<bean class="ocn.site.sf.ioc.bean.ref.Person" id="person"></bean>
+	<bean class="ocn.site.sf.ioc.bean.ref.User">
+		<property name="person">
+			<ref bean="person" />
+		</property>
+	</bean>
+
+</beans>

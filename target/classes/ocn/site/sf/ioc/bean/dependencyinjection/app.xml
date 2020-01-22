@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!--spring中依赖注入的实现有2种方式
+		基于setter方法和基于有参构造器
+		其中配置方式灵活多变，具体的查看相关doc文档。
+		使用和学习起来非常的简单和便捷。
+	-->
+
+	<bean class="ocn.site.sf.ioc.bean.dependencyinjection.User" id="auser">
+		<property name="person">
+			<bean class="ocn.site.sf.ioc.bean.dependencyinjection.Person"></bean>
+		</property>
+		<property name="person.id" value="#{34}"></property>
+	</bean>
+
+	<bean class="ocn.site.sf.ioc.bean.dependencyinjection.User" id="buser">
+		<constructor-arg name="person">
+			<bean class="ocn.site.sf.ioc.bean.dependencyinjection.Person"></bean>
+		</constructor-arg>
+	</bean>
+
+
+</beans>

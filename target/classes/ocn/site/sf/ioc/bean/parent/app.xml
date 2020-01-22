@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!--
+		配置bean的继承关系
+
+		父bean中使用属性abstract(可选的,若是抽象类则使用)
+		子bean中使用属性parent
+
+		补充说明:
+		需要继承属性的父类,可以是抽象类,也可以是实体类.
+		只要求,两个类型之间继承的属性类型和标识符相同;
+		若需要创建一个属性配置模板,则使用抽象类定位为父类是较为推荐的.
+	-->
+
+	<bean class="ocn.site.sf.ioc.bean.parent.Person" id="person">
+		<property name="id" value="#{34}"></property>
+		<!-- 真实环境初始化不同类型的父类的属性，会抛出异常 -->
+		<!-- <property name="number" value="#{'hack'}"></property> -->
+	</bean>
+	<bean class="ocn.site.sf.ioc.bean.parent.User" parent="person"></bean>
+
+
+</beans>

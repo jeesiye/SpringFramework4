@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!--
+		使用depends-on
+		a)使用位置在bean标签中,属于bean标签的属性;
+		b)若A类和B类的关联关系不明显,但是在获取A类的对象时,需要先初始化B类,来满足A类的初始化工作;
+		depends-on属性的作用就是,在实例化A类之前,先实例化指定的B类.
+		3)示例
+		<bean id="A" class=""/>
+		<bean id="B" depends-on="A" class=""/>
+
+		替代方案
+		使用注解@DependsOn
+		org.springframework.context.annotation.DependsOn
+		a)这个注解本质上等价于属性depends-on.
+		b)可以使用在类级别上(结合@Component),也可以使用在方法级别上(结合@Bean).
+	-->
+
+	<bean class="ocn.site.sf.ioc.bean.dependson.Person" id="person"></bean>
+	<!-- 为达到测试效果，此bean应当配置懒加载模式。 -->
+	<bean class="ocn.site.sf.ioc.bean.dependson.PersonInit" lazy-init="true" id="personInit">
+		<property name="person">
+			<ref bean="person" />
+		</property>
+		<property name="person.id" value="#{34}"></property>
+	</bean>
+	<!-- 若是不配置depends-on属性的话，依赖的person就不会初始化指定的设置id -->
+	<bean class="ocn.site.sf.ioc.bean.dependson.User" depends-on="personInit">
+		<property name="person">
+			<ref bean="person" />
+		</property>
+	</bean>
+
+</beans>

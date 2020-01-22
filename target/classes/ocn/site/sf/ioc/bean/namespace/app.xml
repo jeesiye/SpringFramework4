@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- p和c的命名空间，根据个人喜好使用。
+		注意，使用的方式有多种，可根据标识符，下标，类型等方式使用。
+		具体使用方式参考doc，个人不喜欢使用这种方式。 此举仅作学习了解。 -->
+	<bean class="ocn.site.sf.ioc.bean.namespace.User" p:id="34" id="aperson"></bean>
+	<bean class="ocn.site.sf.ioc.bean.namespace.User" c:id="45" id="bperson"></bean>
+
+
+</beans>

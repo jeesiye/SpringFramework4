@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!--
+		注意，springioc中自动装配，是依赖于setter方法的！！！
+
+		xml风格的配置中属性autowired的4个候选值的
+		no ： 表示不使用自动装配，默认值。
+		byName ： 表示按照查找bean的名称来进行自动装配的布局（依赖setter方法）
+		byType ： 表示安装bean的类型来进行自动装配（依赖setter方法）
+		constructor ：性质和bytype一样，但是依赖有参构造器来进行自动装配的。
+		详细的说明，查看该属性的doc文档。
+
+		自动装配有哪些局限性？
+		1）属性和有参构造器中的依赖设置，会覆盖自动装配的设置。
+		不能自动装配设置简单的属性，例如基本类型，字符串类型，类类型，数组。
+		2）可读性不强。
+		3）在处理单个值的依赖项时，可能会出现歧义。
+
+		使用自动装配的建议？
+		1）为了避免歧义和增加可读性，推荐使用显式布线配置bean。
+		2）对于可能引起歧义的bean设置属性autowire-candidate为false。
+		注意这种配置设定，是覆盖全局的，对xml-config和java-config都是有效的。
+		3）存在多个同类bean时，可设置bean的属性primary为true，来尽量的避免歧义。
+	-->
+
+	<bean class="ocn.site.sf.ioc.bean.autowire.Person"></bean>
+	<bean class="ocn.site.sf.ioc.bean.autowire.User" autowire="byType"></bean>
+
+
+</beans>

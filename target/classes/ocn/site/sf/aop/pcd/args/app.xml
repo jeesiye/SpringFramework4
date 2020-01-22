@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
+
+	<bean class="ocn.site.sf.aop.pcd.args.User"></bean>
+	<!--因为以下两个bean之间有继承关系，应当配置id属性。 -->
+	<bean class="ocn.site.sf.aop.pcd.args.Param" id="param"></bean>
+	<bean class="ocn.site.sf.aop.pcd.args.ParamImpl" id="paramImpl"></bean>
+
+	<bean class="ocn.site.sf.aop.pcd.args.LogUser" id="logUser"></bean>
+
+	<aop:config>
+		<aop:aspect ref="logUser">
+			<aop:before method="beforeAdvice" pointcut="args(int)" />
+			<aop:after method="afterAdvice" pointcut="@args(ocn.site.sf.aop.pcd.args.Custanno)" />
+		</aop:aspect>
+	</aop:config>
+
+
+</beans>

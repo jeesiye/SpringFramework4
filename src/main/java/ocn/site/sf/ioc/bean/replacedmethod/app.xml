@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!--
+		方法替换:
+		即替换目标类中的任意方法;
+		适用的场景:有时候需要引入的外部类无法满足现有的需由,但是又不能更改依外部类的属性和行为;
+		此时使用spring ioc中的方法替换机制,即可满足需求,降低对外部类的侵入性.
+
+		目前版本中,只能实现指定的类,来满足这一需求,即实现 org.springframework.beans.factory.support.MethodReplacer
+		接口.
+		然后结合<bean>的内置标签<replaced-method>实现功能.
+
+		使用注意事项:
+		a)<replaced-method>标签,应当内嵌在目标类所属的<bean>标签内;
+		<bean id="targetCls" class="">
+		<replaced-method name="replaceMethodName" replacer="replaceClsIdName">
+		<arg-type match=""/>
+		</replaced-method>
+		</bean>
+
+		b)<replaced-method>标签属性的说明:
+		name:指的是需要替换的方法的签名;
+		replacer:指的是 MethodReplacer 的实现类的bean的id或name名称;
+		内嵌标签<agr-type>的说明:指的是替换方法的参数类型,若是多个参数,按照参数的次序,可依次指明参数类型;
+		其中的属性`match`的值应当定义类型的完全限定名的值;
+
+		c)MethodReplacer接口方法的说明:
+		Object reimplement(Object obj, Method method, Object[] args) throws Throwable;
+		参数列表:
+		obj : 表示的需要替换方法的目标类实例;
+		method : 需要替换的方法签名;
+		args : 需要替换的方法的参数列表;
+		返回类型 Object
+		return : 自定义该方法的返回值;注意类型要和目标类方法返回类型一致.
+	-->
+	<bean class="ocn.site.sf.ioc.bean.replacedmethod.MethodReplacerImpl" id="methodReplaced"></bean>
+	<bean class="ocn.site.sf.ioc.bean.replacedmethod.User">
+		<replaced-method name="work" replacer="methodReplaced">
+			<arg-type match="java.lang.Integer"></arg-type>
+		</replaced-method>
+	</bean>
+
+</beans>

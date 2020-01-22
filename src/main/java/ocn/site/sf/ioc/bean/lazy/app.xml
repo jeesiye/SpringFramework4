@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!--
+		bean的懒加载设置
+		a)对于注册到容器中的bean,只有当使用到的时候,容器才会初始化所需的bean.
+		b)在bean标签中,设置属性lazy-init
+		在beans标签中,设置属性default-lazy-init
+		c)
+		<beans default-lazy-init="true"/>
+		<bean lazy-init="true"/>
+
+		注解替代方案,使用@Lazy
+		org.springframework.context.annotation.Lazy
+		组合使用策略
+		a)@Lazy + @Component | @Bean (等价lazy-init属性)
+		b)@Lazy + @Configuration (等价default-lazy-init属性)
+	-->
+
+	<bean class="ocn.site.sf.ioc.bean.lazy.User" lazy-init="true"></bean>
+
+</beans>

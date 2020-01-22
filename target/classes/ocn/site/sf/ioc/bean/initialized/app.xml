@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!--
+		bean的初始化
+
+		1,使用POJO的无参构造器的方式
+		只需在bean标签的class属性值,设置POJO的全类名即可.
+		<bean id="唯一标识符" class="完全限定名"/>
+
+		2,另一种是使用工厂创建的方式
+		分为两种形式,静态工厂和实例工厂;除了需要设置bean标签的属性class值外,
+		还需要设置属性factory-method和factory-bean的值;
+		其中factory-method指向的是POJO的静态工厂方法签名,或者是工厂方法签名;
+		factory-bean指向的是容器上下文中已注册的bean的id名称;
+		<bean id="唯一标识符" class="完全限定名" factory-method="静态工厂方法签名"/>
+		<bean id="唯一标识符" class="完全限定名" factory-bean="POJO实例bean的id值" factory-method="实例工厂方法签名"/>
+	-->
+
+	<bean class="ocn.site.sf.ioc.bean.initialized.User" id="obj1"></bean>
+	<bean class="ocn.site.sf.ioc.bean.initialized.User"
+		factory-method="getInstance" id="obj2"></bean>
+	<bean class="ocn.site.sf.ioc.bean.initialized.User"
+		factory-bean="obj1" factory-method="getUser" id="obj3"></bean>
+
+</beans>

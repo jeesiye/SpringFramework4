@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
+
+	<bean class="ocn.site.sf.aop.aspectj.pointcut.User"></bean>
+	<bean class="ocn.site.sf.aop.aspectj.pointcut.LogUser" id="logUser"></bean>
+
+	<aop:config>
+		<aop:pointcut expression="execution(* ocn.site.sf.aop.aspectj.pointcut.User.*(..))" id="reuse" />
+		<aop:aspect ref="logUser">
+			<aop:before method="beforeAdvice" pointcut-ref="reuse" />
+			<aop:after method="afterAdvice" pointcut-ref="reuse" />
+		</aop:aspect>
+	</aop:config>
+
+</beans>

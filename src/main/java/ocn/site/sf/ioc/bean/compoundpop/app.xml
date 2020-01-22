@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!--
+		在依赖注入配置的时候
+		spring支持复合属性的直接配置初始化其值
+	-->
+	<bean class="ocn.site.sf.ioc.bean.compoundpop.User">
+		<property name="person">
+			<bean class="ocn.site.sf.ioc.bean.compoundpop.Person"></bean>
+		</property>
+		<property name="person.id" value="#{34}"></property>
+	</bean>
+
+
+</beans>

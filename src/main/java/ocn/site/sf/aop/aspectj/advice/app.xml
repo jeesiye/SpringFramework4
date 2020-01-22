@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
+	<bean class="ocn.site.sf.aop.aspectj.advice.User"></bean>
+	<bean class="ocn.site.sf.aop.aspectj.advice.LogUser" id="logUser"></bean>
+
+	<aop:config>
+		<aop:aspect ref="logUser">
+			<aop:before method="beforeAdvice"
+				pointcut="execution(public void ocn.site.sf.aop.aspectj.advice.User.handlerBefore())" />
+			<aop:after method="afterAdvice"
+				pointcut="execution(public void ocn.site.sf.aop.aspectj.advice.User.handlerAfter())" />
+			<aop:after-returning method="returningAdvice"
+				pointcut="execution(public * ocn.site.sf.aop.aspectj.advice.User.handlerReturning())" returning="value" />
+			<aop:after-throwing method="throwingAdvice"
+				pointcut="execution(public void ocn.site.sf.aop.aspectj.advice.User.handlerThrowing())" throwing="ex" />
+			<aop:around method="aroundAdvice"
+				pointcut="execution(public void ocn.site.sf.aop.aspectj.advice.User.handlerAround())" />
+		</aop:aspect>
+	</aop:config>
+
+
+</beans>

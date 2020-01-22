@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!--
+		可通过alias标签来指定bean的别名。
+		另外，关于bean命名的规范中，有几乎不推荐使用的特性。
+		1、bean的命名可通过id和name属性来完成，另外命名规范遵循XML中对id的规范约定。
+		2、可定义多个名称，使用逗号、分号、空格隔开。（几乎不使用）
+	-->
+
+	<bean class="ocn.site.sf.ioc.bean.alias.Person" name="a b c"></bean>
+	<bean class="ocn.site.sf.ioc.bean.alias.Person" name="aa ab ac"></bean>
+	<alias name="a" alias="user" />
+
+</beans>

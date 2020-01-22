@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="ocn.site.sf.ioc.bean.innerbean.User">
+		<property name="person">
+			<!-- 内嵌bean的依赖注入,此方式可以引用同等级别的环境容器中存在的bean作为依赖项,进行注入 -->
+			<bean class="ocn.site.sf.ioc.bean.innerbean.Person"></bean>
+		</property>
+	</bean>
+
+
+</beans>

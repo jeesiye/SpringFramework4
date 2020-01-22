@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!-- 集合元素的合并(merge)
+		a)集合合并的使用常见一般是在涉及到bean之间的继承时使用的.
+		父bean中设置`abstract="true"`属性,子bean中设置`parent=""`属性.
+		然后再集合标签中设置属性`merge="true"`属性,即可实现集合属性的继承合并.
+		b)仅作了解,不常使用.
+		<bean id="parent" abstract="true" class="">
+		<property name="">
+		<list></list>
+		</property>
+		</bean>
+		<bean id="child" parent="parent" class="">
+		<property name="">
+		<list merge="true"></list>
+		</property>
+		</bean>
+		以上配置中,child的bean中会继承合并parent的bean中的list属性值.
+		c)注意事项
+		集合合并的时候,是有限制的,不能合并不同类型的集合.例如合并map和list,这种操作时被禁止的.
+
+
+		此外,还可以使用util命名空间 -->
+
+	<bean class="ocn.site.sf.ioc.bean.collections.User">
+		<property name="list">
+			<list value-type="java.lang.Integer" merge="default">
+				<value>0</value>
+				<value>0</value>
+				<value>0</value>
+			</list>
+		</property>
+		<property name="set">
+			<set value-type="java.lang.Integer" merge="default">
+				<value>0</value>
+				<value>1</value>
+				<value>2</value>
+			</set>
+		</property>
+		<property name="map">
+			<map key-type="java.lang.Integer" value-type="java.lang.String" merge="default">
+				<entry key="0" value="jack"></entry>
+				<entry key="1" value="rose"></entry>
+				<entry key="2" value="hack"></entry>
+			</map>
+		</property>
+		<property name="array">
+			<array value-type="java.lang.Integer" merge="default">
+				<value>3</value>
+				<value>3</value>
+				<value>3</value>
+			</array>
+		</property>
+		<property name="props">
+			<props value-type="java.lang.String" merge="default">
+				<prop key="0">aaa</prop>
+				<prop key="1">bbb</prop>
+				<prop key="2">ccc</prop>
+			</props>
+		</property>
+	</bean>
+
+</beans>

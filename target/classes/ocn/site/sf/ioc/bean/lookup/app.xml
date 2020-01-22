@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!--
+		方法的注入(lookup)
+
+		概念理解
+		lookup适用的需求场景:当bean A依赖于bean B时,不论是单例的还是多例的bean A,对于当前的bean A,
+		容器只会给他一次初始化的机会;若要从容器中重新获取bean A的实例,那就不是当前的了,而是新的实例,
+		此种情况仅适用bean A是多例模式下的.
+		但是bean A需要在不同的时候,获取具有不同属性和状态的bean B,其实可使用setter方法替代?
+		暂定.
+
+		使用方式.
+		第一种方式,是实现ApplicationContextAware接口.
+		public class DependsInjectBeanA implements ApplicationContextAware {
+		private ApplicationContext applicationContext;
+		@Override
+		public void setApplicationContext(ApplicationContext applicationContext)
+		throws BeansException {
+		this.applicationContext = applicationContext;
+		}
+		// 新增需要注入的方法,借用applicationContext实例.
+		...
+		}
+
+		第二种方式,使用内嵌的look-up标签.
+		a)此标签<look-up>需要内嵌到<bean>的标签下.使用模板如下:
+		<look-up name="" bean=""/>
+		其中属性name值指向的bean A中定义的获取新状态bean B的方法;
+		属性bean值指向的是所依赖于的bean B的id或name的值,只要是存在容器中合法的bean即可.
+		b)补充说明:
+		在bean A的类中新增的方法,要遵循以下的格式:
+		<public|protected> [abstract] <return-type> theMethodName(no-arguments);
+		若是声明抽象的方法,bean A就必要时抽象类了,故此种方式一般不常使用;
+		若是声明为具体方法,返回类型一般建议为bean B的类型,至于方法实体大多不要理会;
+		其动态生成的子类会覆盖其新增的方法.一般可定义下面的格式:
+		public returnTypeBeanB theMethodName(){
+		return null;
+		}
+		这样定义了,动态生成的子类会覆盖重写这个方法的.
+
+		第三种方式,就是替代内嵌标签<look-up>的方案了,使用注解@Lookup.
+		该注解只设置了一个默认值value,此value值表示的指向依赖于bean B的id或name名称.
+		若是没有设置就容器会自动根据方法的目标类型自动解析,但一般不建议这么做,因为会引起歧义.
+		正确建议的使用方式应当是这样的:@Lookup("beanBofName").
+		注意,此注解只能使用在方法上.
+	-->
+
+	<bean class="ocn.site.sf.ioc.bean.lookup.Person" id="person" scope="prototype"></bean>
+	<bean class="ocn.site.sf.ioc.bean.lookup.User">
+		<lookup-method name="getPerson" bean="person" />
+	</bean>
+
+</beans>
